@@ -10,39 +10,12 @@ namespace GeneticAlgorithm
     class Genome
     {
         public int Parameter;
-        public double Fitness;
+        public float Fitness;
 
-        private int _length;
-        private static double _mutationRate;
-        private static Random _random = new Random();
-
-        // #constructor 1
-        public Genome(int parameter, int length)
+        public Genome(int parameter)
         {
             Parameter = parameter;
-            _length = length;
-        }
 
-        // #constructor 2
-        public Genome(int length, bool needNewGenes)
-        {
-            _length = length;
-
-            if (needNewGenes)
-                CreateGenes();
-        }
-
-        public Genome()
-        {
-
-        }
-
-        // brauchen wir weitere constructors?
-        
-        private void CreateGenes()
-        {
-            for (int i = 0; i < _length; i++)
-                _genes[i] = _random.NextDouble();
         }
     }
 }
