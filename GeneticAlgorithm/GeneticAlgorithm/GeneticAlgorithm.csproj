@@ -41,7 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BackpackProblem.cs" />
+    <Compile Include="BackpackProblem\BackpackProblem.cs" />
+    <Compile Include="BackpackProblem\item.cs" />
     <Compile Include="FitnessFunction.cs" />
     <Compile Include="Genome.cs" />
     <Compile Include="MainAlgorithm.cs" />
