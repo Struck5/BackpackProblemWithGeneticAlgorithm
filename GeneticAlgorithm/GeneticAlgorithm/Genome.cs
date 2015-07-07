@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,6 +10,7 @@ namespace GeneticAlgorithm
     class Genome
     {
         public double[] _genes;
+        public int Parameter;
         public double Fitness;
 
         private int _length;
@@ -16,8 +18,9 @@ namespace GeneticAlgorithm
         private static Random _random = new Random();
 
         // #constructor 1
-        public Genome(int length)
+        public Genome(int parameter, int length)
         {
+            Parameter = parameter;
             _length = length;
         }
 
@@ -28,6 +31,11 @@ namespace GeneticAlgorithm
 
             if (needNewGenes)
                 CreateGenes();
+        }
+
+        public Genome()
+        {
+
         }
 
         // brauchen wir weitere constructors?
