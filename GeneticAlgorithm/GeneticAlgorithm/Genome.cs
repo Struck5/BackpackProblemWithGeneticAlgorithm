@@ -8,15 +8,35 @@ namespace GeneticAlgorithm
 {
     class Genome
     {
-        List<int> platzhalter = new List<int>(); 
+        public double[] _genes;
+        public double Fitness;
 
-        public int Parameter;
+        private int _length;
+        private static double _mutationRate;
+        private static Random _random = new Random();
 
-        public float Fitness;
-
-        public Genome(int parameter)
+        // #constructor 1
+        public Genome(int length)
         {
-            Parameter = parameter;
+            _length = length;
+        }
+
+        // #constructor 2
+        public Genome(int length, bool needNewGenes)
+        {
+            _length = length;
+
+            if (needNewGenes)
+                CreateGenes();
+        }
+
+        // brauchen wir weitere constructors?
+        
+        private void CreateGenes()
+        {
+            for (int i = 0; i < _length; i++)
+                _genes[i] = _random.NextDouble();
         }
     }
 }
+
