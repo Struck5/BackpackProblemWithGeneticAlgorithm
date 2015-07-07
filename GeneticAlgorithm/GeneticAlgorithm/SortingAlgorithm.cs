@@ -17,8 +17,8 @@ namespace GeneticAlgorithm
 
             for (int i = 0; i < Auswahl.Count; i++)
             {
-                int check = temp & 2^i;
-                if (check == (2^i))
+                int check = temp & 1 << i;
+                if (check == (1<<i))
                 {
                     ImSack.Add(Auswahl[i]);
                 }
