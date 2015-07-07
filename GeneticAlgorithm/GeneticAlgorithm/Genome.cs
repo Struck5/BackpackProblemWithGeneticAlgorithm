@@ -8,6 +8,8 @@ namespace GeneticAlgorithm
 {
     class Genome
     {
+        List<int> platzhalter = new List<int>(); 
+
         public int Parameter;
 
         public float Fitness;
