@@ -10,7 +10,7 @@ namespace GeneticAlgorithm
     {
         //Bewertungskriterien:
         //Maximalgewicht überschritten => Fitness sehr klein/direkt auf 0
-        //Gold = 0 (nichts eingepackt) => Fitness = 0;
+        //Gold = 0 => Fitness = 0;
         //Eventuell nicht nur Gold sondern auch Gold pro Gewicht Verhältnis beurteilen?
         //Maximalgewicht perfekt/sehr nahe getroffen = Bonuspunkte!
         // Je weiter vom MaximalGewicht entfernt, desto kleiner die Fitness!

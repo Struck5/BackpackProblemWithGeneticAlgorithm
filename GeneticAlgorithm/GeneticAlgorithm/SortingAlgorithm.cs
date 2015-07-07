@@ -15,7 +15,7 @@ namespace GeneticAlgorithm
         {
             int temp = genom.Parameter;
 
-            for (int i = 0; i < Auswahl.Count; i++)
+            for (int i = 0; i < 31; i++)
             {
                 int check = temp & 1 << i;
                 if (check == (1<<i))

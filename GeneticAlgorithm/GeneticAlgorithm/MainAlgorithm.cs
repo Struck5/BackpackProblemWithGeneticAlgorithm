@@ -29,7 +29,7 @@ namespace GeneticAlgorithm
         {
             for (int i = 0; i < PopulationSize; i++)
             {
-                Solutions.Add(new Genome(rnd.Next(0, Int32.MaxValue)));
+                Solutions.Add(new Genome(rnd.Next(1, Int32.MaxValue)));
             }
         }
     }
