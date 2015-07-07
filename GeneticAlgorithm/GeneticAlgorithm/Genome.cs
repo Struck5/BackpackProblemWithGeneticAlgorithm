@@ -8,15 +8,13 @@ namespace GeneticAlgorithm
 {
     class Genome
     {
-        public int Parameter1;
-        public int Parameter2;
+        public int Parameter;
 
         public float Fitness;
 
-        public Genome(int parameter1, int parameter2)
+        public Genome(int parameter)
         {
-            Parameter1 = parameter1;
-            Parameter2 = parameter2;
+            Parameter = parameter;
         }
     }
 }
