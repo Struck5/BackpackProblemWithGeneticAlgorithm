@@ -9,6 +9,10 @@ namespace GeneticAlgorithm
 {
     class Genome
     {
+<<<<<<< HEAD
+=======
+        public double[] _genes;
+>>>>>>> 8fa47bd0a7a78e5940fb627f77547d36f1d37d9e
         public int Parameter;
         public double Fitness;
 
