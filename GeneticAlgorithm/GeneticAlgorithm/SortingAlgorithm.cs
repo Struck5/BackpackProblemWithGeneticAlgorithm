@@ -10,7 +10,7 @@ namespace GeneticAlgorithm
 {
     class SortingAlgorithm
     {
-        List<Item> Auswahl = new List<Item>();  //32 Elemente
+        List<Item> Auswahl = new List<Item>();  //32 Elemente; Wann/Wie/Wo wird diese liste gefüllt?
 
         public void Sort(Genome genom)
         {
