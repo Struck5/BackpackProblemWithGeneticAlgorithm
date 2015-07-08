@@ -15,8 +15,12 @@ namespace GeneticAlgorithm
 
             MainAlgorithm Algorithm = new MainAlgorithm(0.8, 0.1, 100, 500);
 
+            Genome Result;
+
             Algorithm.GenerateRandomItems();
-            Algorithm.GenerateSolutions();
+            Algorithm.GenerateRandomSolutions();
+            Result = Algorithm.Evolve();
+            Console.WriteLine(Result.Fitness);
             
             //for(int i = 0; i < 100, i++)
             //SortingAlgorithm.Sort (Genome[i]);
@@ -33,9 +37,13 @@ namespace GeneticAlgorithm
             // on Finish start Mutation Check:
             //if MutationProbability[i] == true
             //      Mutate[i], Next_Generation.Add Mutate return.
+
+
             //if Next_Generation.Count < 100 => rinse&repeat!
             //      else start new with Next_Generation as List
             // Stop if OptimalFitness != null && Fitness[i] > OptimalFitness || Generations >= 500;
+
+
             //return Best Solution
         }
     }
