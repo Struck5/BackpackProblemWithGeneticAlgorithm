@@ -60,7 +60,11 @@ namespace GeneticAlgorithm
 
                 Solutions.OrderByDescending(t => t.Fitness);
 
-                double minimalFitness = Solutions.Sum(t => t.Fitness) / PopulationSize;
+                //double minimalFitness = Solutions.Sum(t => t.Fitness) / PopulationSize;
+
+                double minimalFitness = Solutions.Where(x => !x.Fitness.Equals(0)).Sum(t => t.Fitness) / PopulationSize - Solutions.Count(x => !x.Fitness.Equals(0));
+                //Console.WriteLine("Minimale Fitness: " + minimalFitness);
+
 
                 while (NextGeneration.Count < PopulationSize)
                 {
