@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GeneticAlgorithm.BackpackProblem;
 
 namespace GeneticAlgorithm
 {
@@ -10,14 +11,21 @@ namespace GeneticAlgorithm
     {
         static void Main(string[] args)
         {
+            Random rnd = new Random();
+
             MainAlgorithm Algorithm = new MainAlgorithm(0.8, 0.1, 100, 500);
 
+            Algorithm.GenerateRandomItems();
             Algorithm.GenerateSolutions();
-
+            
             //for(int i = 0; i < 100, i++)
             //SortingAlgorithm.Sort (Genome[i]);
             //CalculateFitness (Genome[i]);
+
+
             //Sort Genomes by Fitness, start CrossoverCheck:
+
+
             //if Fitness[i] > minimalFitness && ProbabilityCheck[i] == true
             //      Create tempCopy[i]
             //if tempCopy != null, Crossover (old_tempCopy, new_tempCopy)

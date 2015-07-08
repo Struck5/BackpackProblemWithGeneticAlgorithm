@@ -8,12 +8,12 @@ namespace GeneticAlgorithm
 {
     class FitnessFunction
     {
-        public int MaximalGewicht = 100;
+        public static int MaximalGewicht = 100;
 
         //Bewertungskriterien:
         //Eventuell nicht nur Gold sondern auch Gold pro Gewicht Verhältnis beurteilen?
         
-        public void CalculateFitness(Genome genom)
+        public static void CalculateFitness(Genome genom)
         {
             // Mögliche FitnessFunktionen, nicht final, nicht alle zusammen verwenden!!!
 

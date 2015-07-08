@@ -8,11 +8,11 @@ using GeneticAlgorithm.BackpackProblem;
 
 namespace GeneticAlgorithm
 {
-    class SortingAlgorithm
+    static class SortingAlgorithm
     {
-        List<Item> Auswahl = new List<Item>();  //32 Elemente; Wann/Wie/Wo wird diese liste gefüllt?
+        public static List<Item> Auswahl = new List<Item>();  //32 Elemente; Wann/Wie/Wo wird diese liste gefüllt?
 
-        public void Sort(Genome genom)
+        public static void Sort(Genome genom)
         {
             int temp = genom.Parameter;
 
