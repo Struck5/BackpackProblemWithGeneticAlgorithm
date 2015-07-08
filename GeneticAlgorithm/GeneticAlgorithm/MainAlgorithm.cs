@@ -113,7 +113,8 @@ namespace GeneticAlgorithm
                 }
 
                 Solutions.RemoveAll(t => t.Parameter != null);
-                Solutions = NextGeneration;
+                //Solutions = NextGeneration;
+                Solutions.AddRange(NextGeneration);
                 NextGeneration.RemoveAll(t => t.Parameter != null);
 
             }

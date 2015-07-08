@@ -22,7 +22,7 @@ namespace GeneticAlgorithm
             genom.Fitness += genom.ImSack.Sum(t => t.Worth);
 
             float x = genom.ImSack.Sum(t => t.Weight) - MaxValue;
-            genom.Fitness += (-((0.5f * x * x) + (10 * x)));
+            genom.Fitness += (-((0.5f * x * x) + (5 * x)));
 
             if (genom.Fitness < 1)
             {

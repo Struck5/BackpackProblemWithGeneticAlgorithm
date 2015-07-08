@@ -21,7 +21,12 @@ namespace GeneticAlgorithm
             Algorithm.GenerateRandomSolutions();
             Result = Algorithm.Evolve();
             Console.WriteLine(Result.Fitness);
-            
+            Console.WriteLine(Result.ImSack.Sum(t => t.Weight));
+            Console.WriteLine(Result.ImSack.Sum(t => t.Worth));
+            Console.WriteLine("Gewicht aller Items: " + SortingAlgorithm.Auswahl.Sum(t => t.Weight));
+            Console.WriteLine("Wert aller Items: " + SortingAlgorithm.Auswahl.Sum(t => t.Worth));
+            Console.ReadKey();
+
             //for(int i = 0; i < 100, i++)
             //SortingAlgorithm.Sort (Genome[i]);
             //CalculateFitness (Genome[i]);
