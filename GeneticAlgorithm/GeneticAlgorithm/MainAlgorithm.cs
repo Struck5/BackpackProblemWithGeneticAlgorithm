@@ -37,10 +37,12 @@ namespace GeneticAlgorithm
                 Solutions.Add(new Genome(rnd.Next(1, Int32.MaxValue)));
                 SortingAlgorithm.Sort(Solutions[i]);
                 FitnessFunction.CalculateFitness(Solutions[i]);
+                Console.WriteLine("#" + i + ": " + Solutions[i].Fitness);
             }
 
             Solutions.OrderByDescending(t => t.Fitness);
-            double minimalFitness = Solutions.Sum(t => t.Fitness) / PopulationSize;
+            double minimalFitness = Solutions.Where(x => !x.Fitness.Equals(0)).Sum(t => t.Fitness) / PopulationSize - Solutions.Count(x => !x.Fitness.Equals(0));
+            Console.WriteLine("Minimale Fitness: " + minimalFitness);
 
             for (int i = 0; i < Solutions.Count; i++)
             {
