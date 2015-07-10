@@ -6,6 +6,9 @@ namespace BackpackProblem
 {
     static class BackpackDemo
     {
+        public static List<string> ListOfNames = new List<string>();
+        public static int NumberOfNames = 1000;
+
         static Random rnd = new Random();
         public static List<Genome<int>> temp = new List<Genome<int>>();  
 
@@ -20,9 +23,14 @@ namespace BackpackProblem
 
         public static void GenerateRandomItems()
         {
+            for (int i = 0; i < NumberOfNames; i++)
+            {
+                ListOfNames.Add("Item_" + rnd.Next(1, NumberOfNames));
+            }
+
             for (int i = 0; i < 32; i++)
             {
-                SortingAlgorithm.Auswahl.Add(new Item(rnd.Next(1, 51), rnd.Next(0, 101)));
+                SortingAlgorithm.Auswahl.Add(new Item(rnd.Next(1, 51), rnd.Next(0, 101), ListOfNames[rnd.Next(0, NumberOfNames - 1)]));
             }
         }
     }

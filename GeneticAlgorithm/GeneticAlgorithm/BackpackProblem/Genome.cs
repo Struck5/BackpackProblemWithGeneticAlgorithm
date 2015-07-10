@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using BackpackProblem;
 
 
-namespace BackpackProblem
+namespace GeneticAlgorithm
 {
     class Genome<T>
     {

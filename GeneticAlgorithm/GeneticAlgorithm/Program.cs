@@ -17,7 +17,14 @@ namespace GeneticAlgorithm
             Algorithm.CreateItems();
             Algorithm.CreateSolutions();
             Result = Algorithm.Evolve();
-            Console.WriteLine(Result.Fitness);
+
+            for (int i = 0; i < Result.ImSack.Count; i++)
+            {
+                Console.Write(Result.ImSack[i].Name + " (Worth:" + Result.ImSack[i].Worth + " (Weight:" + Result.ImSack[i].Worth + ")");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("MaxWeight: 300");
             Console.WriteLine(Result.ImSack.Sum(t => t.Weight));
             Console.WriteLine(Result.ImSack.Sum(t => t.Worth));
             Console.WriteLine("Gewicht aller Items: " + SortingAlgorithm.Auswahl.Sum(t => t.Weight));
