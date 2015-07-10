@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GeneticAlgorithm.BackpackProblem;
+using BackpackProblem;
 
 namespace GeneticAlgorithm
 {
@@ -13,12 +10,12 @@ namespace GeneticAlgorithm
         {
             Random rnd = new Random();
 
-            MainAlgorithm Algorithm = new MainAlgorithm(0.8, 0.1, 100, 500);
+            MainAlgorithm<int> Algorithm = new MainAlgorithm<int>(0.8, 0.1, 100, 500, BackpackDemo.GenerateRandomItems, BackpackDemo.GenerateRandomSolutions, SortingAlgorithm.Sort, FitnessFunction.CalculateFitness, Breeding.Crossover, Breeding.Mutation);
 
-            Genome Result;
+            Genome<int> Result;
 
-            Algorithm.GenerateRandomItems();
-            Algorithm.GenerateRandomSolutions();
+            Algorithm.CreateItems();
+            Algorithm.CreateSolutions();
             Result = Algorithm.Evolve();
             Console.WriteLine(Result.Fitness);
             Console.WriteLine(Result.ImSack.Sum(t => t.Weight));

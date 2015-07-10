@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GeneticAlgorithm;
 
-namespace GeneticAlgorithm.BackpackProblem
+namespace BackpackProblem
 {
     static class Breeding
     {
@@ -15,7 +16,11 @@ namespace GeneticAlgorithm.BackpackProblem
         public static int NewParam1 = 0;
         public static int NewParam2 = 0;
 
-        static public int[] Crossover(Genome parent1, Genome parent2)
+        static Breeding()
+        {
+        }
+
+        static public int[] Crossover(Genome<int> parent1, Genome<int> parent2)
         {
             CrossPoint = rnd.Next(1, 32);
 
@@ -33,7 +38,7 @@ namespace GeneticAlgorithm.BackpackProblem
             return NewGenomes;
         }
 
-        static public int Mutation(Genome genom)
+        static public int Mutation(Genome<int> genom)
         {
             MutatePoint = rnd.Next(0, 31);
             int temp = (1 << MutatePoint);

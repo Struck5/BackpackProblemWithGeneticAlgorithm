@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using BackpackProblem;
-using GeneticAlgorithm.BackpackProblem;
+﻿using System.Collections.Generic;
 
-namespace GeneticAlgorithm
+
+namespace BackpackProblem
 {
-    class Genome
+    class Genome<T>
     {
         public List<Item> ImSack = new List<Item>(); // Maximal 32 Elemente
 
-        public int Parameter;
+        public T Parameter;
         public float Fitness;
 
-        public Genome(int parameter)
+        public Genome(T parameter)
         {
             Parameter = parameter;
             Fitness = 0;

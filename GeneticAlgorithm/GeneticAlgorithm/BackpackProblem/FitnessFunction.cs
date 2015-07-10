@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+using GeneticAlgorithm;
 
-namespace GeneticAlgorithm
+
+namespace BackpackProblem
 {
-    class FitnessFunction
+    static class FitnessFunction
     {
         public static int MaxValue = 300;
-        
-        public static void CalculateFitness(Genome genom)
+
+        public static void CalculateFitness(Genome<int> genom)
         {
             if (genom.ImSack.Sum(t => t.Weight) >= MaxValue*1.25f)
             {

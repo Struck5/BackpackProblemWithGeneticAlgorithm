@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BackpackProblem;
-using GeneticAlgorithm.BackpackProblem;
+﻿using System.Collections.Generic;
+using GeneticAlgorithm;
 
-namespace GeneticAlgorithm
+namespace BackpackProblem
 {
     static class SortingAlgorithm
     {
         public static List<Item> Auswahl = new List<Item>();  //32 Elemente; Wann/Wie/Wo wird diese liste gefüllt?
 
-        public static void Sort(Genome genom)
+        public static void Sort(Genome<int> genom)
         {
             int temp = genom.Parameter;
 
