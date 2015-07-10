@@ -3,43 +3,39 @@ using GeneticAlgorithm;
 
 namespace BackpackProblem
 {
-    static class Breeding
+    internal static class Breeding
     {
-        static Random rnd = new Random();
+        private static readonly Random Rnd = new Random();
 
-        public static int CrossPoint;
-        public static int MutatePoint;
-        public static int NewParam1 = 0;
-        public static int NewParam2 = 0;
+        private static int _crossPoint;
+        private static int _mutatePoint;
+        private static int _child1;
+        private static int _child2;
 
-        static Breeding()
+        public static int[] Crossover(Genome<int> parent1, Genome<int> parent2)
         {
-        }
+            _crossPoint = Rnd.Next(1, 32);
 
-        static public int[] Crossover(Genome<int> parent1, Genome<int> parent2)
-        {
-            CrossPoint = rnd.Next(1, 32);
-
-            int temp = (1 << CrossPoint) -1;
-            NewParam1 = parent1.Parameter & temp;
-            NewParam2 = parent2.Parameter & temp;
+            int temp = (1 << _crossPoint) - 1;
+            _child1 = parent1.Parameter & temp;
+            _child2 = parent2.Parameter & temp;
 
             temp = Int32.MaxValue - temp;
-            NewParam1 = NewParam1 | (parent2.Parameter & temp);
-            NewParam2 = NewParam2 | (parent1.Parameter & temp);
+            _child1 = _child1 | (parent2.Parameter & temp);
+            _child2 = _child2 | (parent1.Parameter & temp);
 
-            int[] NewGenomes = new int[2];
-            NewGenomes[0] = NewParam1;
-            NewGenomes[1] = NewParam2;
-            return NewGenomes;
+            var crossedGenomes = new int[2];
+            crossedGenomes[0] = _child1;
+            crossedGenomes[1] = _child2;
+            return crossedGenomes;
         }
 
-        static public int Mutation(Genome<int> genom)
+        public static int Mutation(Genome<int> genom)
         {
-            MutatePoint = rnd.Next(0, 31);
-            int temp = (1 << MutatePoint);
-            NewParam1 = genom.Parameter ^ temp;
-            return NewParam1;
+            _mutatePoint = Rnd.Next(0, 31);
+            int temp = (1 << _mutatePoint);
+            _child1 = genom.Parameter ^ temp;
+            return _child1;
         }
     }
 }

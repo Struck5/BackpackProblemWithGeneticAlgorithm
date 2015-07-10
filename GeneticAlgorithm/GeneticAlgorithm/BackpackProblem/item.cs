@@ -1,10 +1,10 @@
 ﻿namespace BackpackProblem
 {
-    class Item
+    internal class Item
     {
+        public string Name;
         public int Weight;
         public int Worth;
-        public string Name;
 
         public Item(int weigth, int worth, string name)
         {

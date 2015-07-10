@@ -4,111 +4,94 @@ using System.Linq;
 
 namespace GeneticAlgorithm
 {
-    class MainAlgorithm<T>
+    internal class MainAlgorithm<T>
     {
-        public delegate List<Genome<T>> GenerateRandomSolutions(int populationSize);
+        public delegate T[] Crossover(Genome<T> parent1, Genome<T> parent2);
+
+        public delegate void FirstGeneration(Genome<T> genom);
+
+        public delegate void FitnessValue(Genome<T> genom);
+
         public delegate void GenerateRandomItems();
 
-        public delegate void AddValueToList(Genome<T> genom);
-        public delegate void ReturnFitnessValue(Genome<T> genom);
-        public delegate T[] Crossover(Genome<T> parent1, Genome<T> parent2);
+        public delegate List<Genome<T>> GenerateRandomSolutions(int populationSize);
+
         public delegate T Mutation(Genome<T> genom);
 
-        GenerateRandomItems randomItems;
-        GenerateRandomSolutions randomSolutions;
-        AddValueToList sort;
-        ReturnFitnessValue fitnessValue;
-        Crossover cross;
-        Mutation mutate;
-
-        List<Genome<T>> Solutions = new List<Genome<T>>();
-        List<Genome<T>> NextGeneration = new List<Genome<T>>(); 
+        private readonly List<Genome<T>> NextGeneration = new List<Genome<T>>();
+        private readonly List<Genome<T>> Solutions = new List<Genome<T>>();
+        private readonly Crossover _crossover;
+        private readonly FirstGeneration _firstGeneration;
+        private readonly FitnessValue _fitnessValue;
+        private readonly Mutation _mutation;
+        private readonly Random rnd = new Random();
 
         public double CrossoverProbability;
+        public int GenerationCount;
         public double MutationProbability;
         public int PopulationSize;
-        public int GenerationCount;
 
-        private Genome<T> crossover_temp = null;
-        private T[] newGenomes = new T[2];
-        private Genome<T> bestFitness;
+        private Genome<T> _bestFitness;
 
-        Random rnd = new Random();
+        private T[] _crossedGenomes = new T[2];
+        private Genome<T> _crossoverPartner;
 
-        public MainAlgorithm(double crossoverProbability, double mutationProbability, int populationSize, int generationCount, GenerateRandomItems gri, GenerateRandomSolutions grs, AddValueToList avl, ReturnFitnessValue rfv, Crossover co, Mutation mu)
+        public MainAlgorithm(double crossoverProbability, double mutationProbability, int populationSize,
+            int generationCount, FirstGeneration firstGeneration, FitnessValue fitnessValue, Crossover crossover,
+            Mutation mutation)
         {
             CrossoverProbability = crossoverProbability;
             MutationProbability = mutationProbability;
             PopulationSize = populationSize;
             GenerationCount = generationCount;
-
-            this.randomItems = gri;
-            this.randomSolutions = grs;
-            this.sort = avl;
-            this.fitnessValue = rfv;
-            this.cross = co;
-            this.mutate = mu;
+            _firstGeneration = firstGeneration;
+            _fitnessValue = fitnessValue;
+            _crossover = crossover;
+            _mutation = mutation;
         }
 
-        public void CreateItems()
+        public Genome<T> Evolve(List<Genome<T>> items)
         {
-            randomItems.Invoke();
-        }
+            Solutions.AddRange(items);
 
-        public void CreateSolutions()
-        {
-            Solutions.AddRange(randomSolutions.Invoke(PopulationSize));
-        }
-
-
-        public Genome<T> Evolve()
-        {
             for (int i = 0; i < GenerationCount; i++)
             {
                 for (int k = 0; k < PopulationSize; k++)
                 {
-                    //SortingAlgorithm.Sort(Solutions[k]);
-                    //AddValueToList sort = new AddValueToList(SortingAlgorithm.Sort);
-                    sort.Invoke(Solutions[k]);
-
-                    //FitnessFunction.CalculateFitness(Solutions[k]);
-                    //ReturnFitnessValue rfv = new ReturnFitnessValue(FitnessFunction.CalculateFitness);
-                    fitnessValue.Invoke(Solutions[k]);
+                    _firstGeneration.Invoke(Solutions[k]);
+                    _fitnessValue.Invoke(Solutions[k]);
                 }
 
                 Solutions.OrderByDescending(t => t.Fitness);
 
-                double minimalFitness = Solutions.Where(x => !x.Fitness.Equals(0)).Sum(t => t.Fitness) / PopulationSize - Solutions.Count(x => !x.Fitness.Equals(0));
+                double minimalFitness = Solutions.Where(x => !x.Fitness.Equals(0)).Sum(t => t.Fitness)/PopulationSize -
+                                        Solutions.Count(x => !x.Fitness.Equals(0));
 
                 while (NextGeneration.Count < PopulationSize)
                 {
                     for (int m = 0; m < Solutions.Count; m++)
                     {
-                        if (NextGeneration.Count < PopulationSize) // NextGeneration schon voll?
+                        if (NextGeneration.Count < PopulationSize)
                         {
-                            if (Solutions[m].Fitness >= minimalFitness && rnd.NextDouble() <= CrossoverProbability) // Crossover
+                            if (Solutions[m].Fitness >= minimalFitness && rnd.NextDouble() <= CrossoverProbability)
                             {
-                                if (crossover_temp == null)
+                                if (_crossoverPartner == null)
                                 {
-                                    crossover_temp = Solutions[m];
+                                    _crossoverPartner = Solutions[m];
                                 }
                                 else
                                 {
-                                    //newGenomes = Breeding.Crossover(crossover_temp, Solutions[m]);
-                                    newGenomes = cross.Invoke(crossover_temp, Solutions[m]);
-                                    //Crossover cross = new Crossover(Breeding.Crossover);
-                                    //newGenomes = cross(crossover_temp, Solutions[m]);
+                                    _crossedGenomes = _crossover.Invoke(_crossoverPartner, Solutions[m]);
 
-                                    NextGeneration.Add(new Genome<T>(newGenomes[0]));
-                                    NextGeneration.Add(new Genome<T>(newGenomes[1]));
-                                    crossover_temp = null;
+                                    NextGeneration.Add(new Genome<T>(_crossedGenomes[0]));
+                                    NextGeneration.Add(new Genome<T>(_crossedGenomes[1]));
+                                    _crossoverPartner = null;
                                 }
                             }
 
-                            if (rnd.NextDouble() <= MutationProbability) // Mutation
+                            if (rnd.NextDouble() <= MutationProbability)
                             {
-                                //mutate.Invoke(Solutions[m]);
-                                NextGeneration.Add(new Genome<T>(mutate.Invoke(Solutions[m])));
+                                NextGeneration.Add(new Genome<T>(_mutation.Invoke(Solutions[m])));
                             }
                         }
                         else
@@ -123,25 +106,23 @@ namespace GeneticAlgorithm
                     NextGeneration.RemoveAt(NextGeneration.Count - 1);
                 }
 
-                if (bestFitness != null)
+                if (_bestFitness != null)
                 {
-                    if (bestFitness.Fitness <= Solutions[0].Fitness)
+                    if (_bestFitness.Fitness <= Solutions[0].Fitness)
                     {
-                        bestFitness = Solutions[0];
+                        _bestFitness = Solutions[0];
                     }
                 }
                 else
                 {
-                    bestFitness = Solutions[0];
+                    _bestFitness = Solutions[0];
                 }
 
                 Solutions.RemoveAll(t => t.Parameter != null);
                 Solutions.AddRange(NextGeneration);
                 NextGeneration.RemoveAll(t => t.Parameter != null);
-
             }
-
-            return bestFitness;
+            return _bestFitness;
         }
     }
 }

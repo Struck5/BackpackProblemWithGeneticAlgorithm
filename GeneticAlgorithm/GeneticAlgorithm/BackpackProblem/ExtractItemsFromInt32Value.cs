@@ -3,9 +3,9 @@ using GeneticAlgorithm;
 
 namespace BackpackProblem
 {
-    static class SortingAlgorithm
+    internal static class ExtractItemsFromInt32Value
     {
-        public static List<Item> Auswahl = new List<Item>();  //32 Elemente; Wann/Wie/Wo wird diese liste gefüllt?
+        public static List<Item> Selection = new List<Item>();
 
         public static void Sort(Genome<int> genom)
         {
@@ -14,9 +14,9 @@ namespace BackpackProblem
             for (int i = 0; i < 31; i++)
             {
                 int check = temp & 1 << i;
-                if (check == (1<<i))
+                if (check == (1 << i))
                 {
-                    genom.ImSack.Add(Auswahl[i]);
+                    genom.ItemsPicked.Add(Selection[i]);
                 }
             }
         }

@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using BackpackProblem;
 
-
 namespace GeneticAlgorithm
 {
-    class Genome<T>
+    internal class Genome<T>
     {
-        public List<Item> ImSack = new List<Item>(); // Maximal 32 Elemente
+        public float Fitness;
+        public List<Item> ItemsPicked = new List<Item>();
 
         public T Parameter;
-        public float Fitness;
 
         public Genome(T parameter)
         {
@@ -18,4 +17,3 @@ namespace GeneticAlgorithm
         }
     }
 }
-
